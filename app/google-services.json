@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "959718372263",
+    "firebase_url": "https://kaban-528b6-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "kaban-528b6",
+    "storage_bucket": "kaban-528b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959718372263:android:4af21cae60f7370302bc82",
+        "android_client_info": {
+          "package_name": "com.begdev.kaban"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959718372263-6k7lh9dtgl7v6s0p171rvciqc3cqsn9q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJXJRC_TO9Ss1miI-zUW5qe-Efuej0C08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959718372263-6k7lh9dtgl7v6s0p171rvciqc3cqsn9q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
