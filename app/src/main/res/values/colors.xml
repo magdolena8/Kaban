@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="olivedrab3">#6D981A</color>
+    <color name="darkmossgreen">#4B6220</color>
+    <color name="olivine">#A5B383</color>
+    <color name="teagreen">#C9DAA5</color>
+    <color name="ivory">#FAFCF0</color>
+    <color name="junebud">#B1DC37</color>
+    <color name="yellowgreencrayoula">#BAD683</color>
 </resources>

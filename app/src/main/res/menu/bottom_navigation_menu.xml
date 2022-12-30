@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/page_second"
+        android:id="@+id/projectsListFragment"
         android:enabled="true"
-        android:icon="@drawable/account"
-        android:title="second"/>
-
+        android:icon="@drawable/view_cozy_48px"
+        android:title="projects"/>
     <item
-        android:id="@+id/page_account"
+        android:id="@+id/page_notes"
+        android:enabled="true"
+        android:icon="@drawable/checklist_48px"
+        android:title="tasks"/>
+    <item
+        android:id="@+id/profileFragment"
         android:enabled="true"
         android:icon="@drawable/account"
         android:title="account"/>
