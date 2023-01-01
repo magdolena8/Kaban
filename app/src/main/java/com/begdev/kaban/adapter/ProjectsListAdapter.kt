@@ -10,7 +10,9 @@ import com.begdev.kaban.databinding.CardProjectBinding
 
 class ProjectsListAdapter :
     ListAdapter<ProjectModel, ProjectsListAdapter.ProjectViewHolder>(DiffCallback()) {
-
+    init {
+        setHasStableIds(true)
+    }
 
     private lateinit var mListener: onItemCLickListener
 

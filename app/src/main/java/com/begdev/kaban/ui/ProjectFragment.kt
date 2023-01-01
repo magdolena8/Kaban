@@ -74,7 +74,7 @@ class ProjectFragment : Fragment() {
             }
         }
 
-//        tablesAdapter.submitList(args.selectedProject.tables)
+
     }
 
 

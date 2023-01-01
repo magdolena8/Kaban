@@ -12,7 +12,9 @@ import com.begdev.kaban.model.TableModel
 
 class TablesAdapter:
     ListAdapter<TableModel, TablesAdapter.TableViewHolder>(DiffCallback()) {
-
+    init {
+        setHasStableIds(true)
+    }
     private lateinit var mListener: onItemCLickListener
 
     interface onItemCLickListener{
@@ -46,6 +48,7 @@ class TablesAdapter:
 
         }
         init {
+
             itemView.setOnClickListener{
                 listener.onItemClick(adapterPosition)
             }

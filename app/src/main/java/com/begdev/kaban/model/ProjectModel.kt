@@ -52,11 +52,10 @@ data class ProjectModel (
     ) {
     }
 
-    fun createProject(): Int {
+    fun createProject() {
         val db = Firebase.firestore
-        val currentUser = FirebaseAuth.getInstance().getCurrentUser();
+//        val currentUser = FirebaseAuth.getInstance().getCurrentUser();
         db.collection("projects").add(this)
-        return 0;
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

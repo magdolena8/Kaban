@@ -11,7 +11,9 @@ import com.begdev.kaban.databinding.CardTableNewBinding
 import com.begdev.kaban.model.ProjectModel
 
 class NewTablesAdapter: ListAdapter<String, NewTablesAdapter.NewTablesViewHolder>(DiffCallback()) {
-
+    init {
+        setHasStableIds(true)
+    }
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

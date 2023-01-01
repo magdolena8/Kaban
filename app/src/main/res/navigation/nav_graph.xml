@@ -60,5 +60,17 @@
             android:name="selectedTable"
             app:argType="com.begdev.kaban.model.TableModel"
             app:nullable="false"/>
+        <action
+            android:id="@+id/action_tableFragment_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTaskFragment"
+        android:name="com.begdev.kaban.ui.CreateTaskFragment"
+        android:label="CreateTaskFragment" >
+        <argument
+            android:name="editingTable"
+            app:argType="com.begdev.kaban.model.TableModel"
+            app:nullable="false"/>
     </fragment>
 </navigation>
