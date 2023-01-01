@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-        <data>
-                <variable
-                    name="ProjectsViewModel"
-                    type="com.begdev.kaban.ProjectViewModel" />
-        </data>
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -20,9 +14,7 @@
                     android:layout_height="match_parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-<!--                    android:animateLayoutChanges="true"-->
-
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                     android:id="@+id/button_create_project"
@@ -34,8 +26,6 @@
                     app:icon="@drawable/box_add"
                     android:text="@string/create_project"
                     android:layout_marginRight="12dp"/>
-<!--                    android:text="@{ProjectsViewModel.uiState.addButtonText}"-->
 
-                <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
         </FrameLayout>
 </layout>

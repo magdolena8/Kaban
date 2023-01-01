@@ -5,15 +5,27 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.begdev.kaban.ProjectViewModel
 import com.begdev.kaban.model.ProjectModel
 import com.begdev.kaban.databinding.CardProjectBinding
 
-class ProjectsAdapter : ListAdapter<ProjectModel, ProjectsAdapter.ProjectViewHolder>(DiffCallback()) {
+class ProjectsListAdapter :
+    ListAdapter<ProjectModel, ProjectsListAdapter.ProjectViewHolder>(DiffCallback()) {
+
+
+    private lateinit var mListener: onItemCLickListener
+
+    interface onItemCLickListener{
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: onItemCLickListener){
+        mListener = listener
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
         val binding = CardProjectBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ProjectViewHolder(binding)
+        return ProjectViewHolder(binding, mListener)
     }
 
     override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
@@ -21,14 +33,24 @@ class ProjectsAdapter : ListAdapter<ProjectModel, ProjectsAdapter.ProjectViewHol
         holder.bind(currentItem)
     }
 
-    class ProjectViewHolder(private val binding: CardProjectBinding) :
+    class ProjectViewHolder(private val binding: CardProjectBinding, listener: onItemCLickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(project: ProjectModel) {
             binding.apply {
-                textViewName.text = project.name
+                textViewTitle.text = project.name
+
 //                textViewCreator.text = project.creator
             }
+
         }
+    init {
+        itemView.setOnClickListener{
+            listener.onItemClick(adapterPosition)
+        }
+    }
+
+
+
     }
 
     class DiffCallback : DiffUtil.ItemCallback<ProjectModel>() {
@@ -39,5 +61,9 @@ class ProjectsAdapter : ListAdapter<ProjectModel, ProjectsAdapter.ProjectViewHol
         override fun areContentsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean {
             return oldItem == newItem
         }
+    }
+
+    interface CustomViewHolderListener{
+        fun onCustomItemClicked(x : ProjectModel)
     }
 }

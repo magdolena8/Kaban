@@ -33,7 +33,7 @@ class NewTablesAdapter: ListAdapter<String, NewTablesAdapter.NewTablesViewHolder
         RecyclerView.ViewHolder(binding.root) {
         fun bind(newTableName: String) {
             binding.apply {
-                textViewName.text = newTableName
+                textViewTitle.text = newTableName
 //                textViewCreator.text = project.creator
             }
         }

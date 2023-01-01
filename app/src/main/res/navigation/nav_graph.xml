@@ -21,12 +21,44 @@
             android:id="@+id/action_projectsListFragment_to_createProjectFragment"
             app:destination="@id/createProjectFragment"
             app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
+            app:exitAnim="@android:anim/fade_out" >
+
+        </action>
+        <action
+            android:id="@+id/action_projectsListFragment_to_projectFragment"
+            app:destination="@id/projectFragment">
+<!--            <argument-->
+<!--                android:name="selectedProject"-->
+<!--                app:argType="com.begdev.kaban.model.ProjectModel"-->
+<!--                app:nullable="false"/>-->
+        </action>
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.begdev.kaban.ui.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="com.begdev.kaban.ui.ProjectFragment"
+        android:label="fragment_project"
+        tools:layout="@layout/fragment_project" >
+        <argument
+            android:name="selectedProject"
+            app:argType="com.begdev.kaban.model.ProjectModel"
+            app:nullable="false"/>
+        <action
+            android:id="@+id/action_projectFragment_to_tableFragment"
+            app:destination="@id/tableFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tableFragment"
+        android:name="com.begdev.kaban.ui.TableFragment"
+        android:label="fragment_table"
+        tools:layout="@layout/fragment_table" >
+        <argument
+            android:name="selectedTable"
+            app:argType="com.begdev.kaban.model.TableModel"
+            app:nullable="false"/>
+    </fragment>
 </navigation>

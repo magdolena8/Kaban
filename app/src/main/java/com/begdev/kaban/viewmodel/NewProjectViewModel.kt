@@ -37,20 +37,20 @@ class NewProjectViewModel() : ViewModel() {
     val navigation: LiveData<Event<NavigationCommand>> get() = _navigation
 
 
-    fun addTableTest() = viewModelScope.launch {
-        val tables: MutableList<String>? = _uiState.value.tablesArrayList;
-        tables?.add(_uiState.value.currentEditingTableName.toString());
-        _uiState.value.project?.tables?.add(_uiState.value.currentEditingTableName.toString())
-    }
+//    fun addTableTest() = viewModelScope.launch {
+//        val tables: MutableList<String>? = _uiState.value.tablesArrayList;
+//        tables?.add(_uiState.value.currentEditingTableName.toString());
+//        _uiState.value.project?.tables?.add(_uiState.value.currentEditingTableName.toString())
+//    }
 
 
     fun addTable(view: View) {
         val tables: MutableList<String>? = _uiState.value.tablesArrayList;
         tables?.add(_uiState.value.currentEditingTableName.toString());
-        _uiState.value.project?.tables?.add(_uiState.value.currentEditingTableName.toString())
+//        _uiState.value.project?.tables?.add(_uiState.value.currentEditingTableName.toString())
 
 //        view.findNavController()
-        navigate(CreateProjectFragmentDirections.actionCreateProjectFragmentToProjectsListFragment())
+//        navigate(CreateProjectFragmentDirections.actionCreateProjectFragmentToProjectsListFragment())
 
     }
 

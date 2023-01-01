@@ -1,6 +1,7 @@
 package com.begdev.kaban.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -12,20 +13,31 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.begdev.kaban.ProjectViewModel
+import com.begdev.kaban.ProjectsListViewModel
 import com.begdev.kaban.R
-import com.begdev.kaban.adapter.ProjectsAdapter
+import com.begdev.kaban.adapter.ProjectsListAdapter
 import com.begdev.kaban.databinding.FragmentProjectsListBinding
+import com.begdev.kaban.model.ProjectModel
 import kotlinx.coroutines.launch
 
 
 class ProjectsListFragment : Fragment(R.layout.fragment_projects_list) {
     private lateinit var binding: FragmentProjectsListBinding
-    private val viewModel: ProjectViewModel by viewModels()
-    val projectsAdapter = ProjectsAdapter()
+    private val vmProjectsList: ProjectsListViewModel by viewModels()
+    val projectsAdapter = ProjectsListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val menuHost: MenuHost = requireActivity()
+        projectsAdapter.setOnItemClickListener(object: ProjectsListAdapter.onItemCLickListener{
+            override fun onItemClick(position: Int) {
+                val project:ProjectModel = projectsAdapter.currentList.get(position)
+                Log.d("TAAG", position.toString())
+                findNavController().navigate(ProjectsListFragmentDirections.actionProjectsListFragmentToProjectFragment(project))
+            }
+        })
+
+
         binding = FragmentProjectsListBinding.bind(view)
         binding.apply {
             recyclerProjects.apply {
@@ -37,13 +49,12 @@ class ProjectsListFragment : Fragment(R.layout.fragment_projects_list) {
 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.uiState.collect {
+                vmProjectsList.uiState.collect {
                     projectsAdapter.submitList(it.projectsArrayList)
                 }
             }
         }
 
-        val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_projects_list, menu)
@@ -57,6 +68,6 @@ class ProjectsListFragment : Fragment(R.layout.fragment_projects_list) {
         binding.buttonCreateProject.setOnClickListener {
                 findNavController().navigate(ProjectsListFragmentDirections.actionProjectsListFragmentToCreateProjectFragment())
         }
-    }
 
+    }
 }
