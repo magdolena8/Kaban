@@ -22,7 +22,7 @@ class ProfileFragment : Fragment() {
             val menuHost: MenuHost = requireActivity()
             menuHost.addMenuProvider(object: MenuProvider{
                 override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                    menuInflater.inflate(R.menu.menu_projects_list, menu)
+                    menuInflater.inflate(R.menu.menu_project, menu)
                 }
 
                 override fun onMenuItemSelected(menuItem: MenuItem): Boolean {

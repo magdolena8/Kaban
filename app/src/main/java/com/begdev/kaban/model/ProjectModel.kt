@@ -4,11 +4,14 @@ import android.os.Parcel
 import android.os.Parcelable
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.PropertyName
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.util.Objects
 
-data class ProjectModel (
+data class ProjectModel(
 
     @get:PropertyName("key")
     @set:PropertyName("key")
@@ -22,13 +25,13 @@ data class ProjectModel (
     @set:PropertyName("creator")
     var creator: String? = FirebaseAuth.getInstance().getCurrentUser()?.email,
 
-    @get:PropertyName("members")
-    @set:PropertyName("members")
-    var members: MutableList<String>? = arrayListOf(),
+    @get:PropertyName("participants")
+    @set:PropertyName("participants")
+    var participants: MutableList<String>? = arrayListOf(),
 
-    @get:PropertyName("tables")
-    @set:PropertyName("tables")
-    var tables: MutableList<String>? = arrayListOf(),
+    @get:PropertyName("tableNamesArray")
+    @set:PropertyName("tableNamesArray")
+    var tableNamesArray: MutableList<String>? = arrayListOf(),
 
     @get:PropertyName("description")
     @set:PropertyName("description")
@@ -38,8 +41,7 @@ data class ProjectModel (
     @set:PropertyName("path")
     var path: String? = ""
 
-    ):Parcelable
-{
+) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -50,12 +52,6 @@ data class ProjectModel (
         parcel.readString(),
         parcel.readString()
     ) {
-    }
-
-    fun createProject() {
-        val db = Firebase.firestore
-//        val currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        db.collection("projects").add(this)
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -78,5 +74,46 @@ data class ProjectModel (
         override fun newArray(size: Int): Array<ProjectModel?> {
             return arrayOfNulls(size)
         }
+
+        fun enterProject(code: String) {
+            val db = Firebase.firestore
+            db.document("projects/" + code).update(
+                "participants",
+                FieldValue.arrayUnion(Firebase.auth.currentUser?.email.toString())
+            )
+        }
     }
+
+    fun createProject() {
+        val db = Firebase.firestore
+        val projectDataObject = hashMapOf(
+            "name" to this.name,
+            "creator" to Firebase.auth.currentUser?.email.toString(),
+            "description" to this.description,
+            "participants" to arrayListOf(Firebase.auth.currentUser?.email.toString()),
+        )
+
+        val tablesDataObject = hashMapOf(
+            "tables" to arrayListOf<Objects>()
+        )
+
+        db.collection("projects").add(projectDataObject).addOnCompleteListener {
+            for (qwe in this.tableNamesArray!!) {
+                val newTable = hashMapOf(
+                    "description" to "",
+                    "title" to qwe,
+                    "tasksCount" to 0
+                )
+                it.result.collection("tables").add(newTable)
+            }
+        }
+    }
+
+//    companion object {
+//        fun enterProject(code: String) {
+//            val db = Firebase.firestore
+//            db.document(path!!).update("tasksCount", FieldValue.increment(-1))
+//
+//        }
+//    }
 }

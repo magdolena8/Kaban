@@ -38,6 +38,7 @@ class TableFragment : Fragment(R.layout.fragment_table) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.setTitle("Table")
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_table, container, false)
         binding.vmTable = viewModelTable

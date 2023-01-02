@@ -72,19 +72,20 @@ data class TaskModel(
 
     fun checkStatus(){
         val db = Firebase.firestore
-        val result = db.document(path+key).update(mapOf(
+        val result = db.document(path+"/tasks/"+key).update(mapOf(
             "isChecked" to true
         ))
-//        db.document(path!!).update("tasksCount", FieldValue.increment(-1))
+//        db.document(path!!).update("tasksCount", FieldValue.increment(1))
+        db.document(path!!).update("tasksCount", FieldValue.increment(-1))
 
     }
 
     fun uncheckStatus(){
         val db = Firebase.firestore
-        val result = db.document(path+key).update(mapOf(
+        val result = db.document(path+"/tasks/"+key).update(mapOf(
             "isChecked" to false
         ))
-//        db.document(path!!).update("tasksCount", FieldValue.increment(1))
+        db.document(path!!).update("tasksCount", FieldValue.increment(1))
 
     }
 }

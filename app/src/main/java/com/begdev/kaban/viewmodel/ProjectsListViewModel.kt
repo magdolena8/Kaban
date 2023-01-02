@@ -2,6 +2,7 @@ package com.begdev.kaban
 
 import androidx.lifecycle.ViewModel
 import com.begdev.kaban.model.ProjectModel
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.MetadataChanges
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -18,8 +19,9 @@ class ProjectsListViewModel : ViewModel() {
     val uiState: StateFlow<ProjectsUiState> = _uiState.asStateFlow()
 
     private val db = Firebase.firestore
-    private val projRef = db.collection("projects")
-    //TODO: брать из бд радельно свои и чужие проекты
+//    private val projRef = db.collection("projects").whereEqualTo("creator", Firebase.auth.currentUser?.email.toString())
+    private val projRef = db.collection("projects").whereArrayContains("participants", Firebase.auth.currentUser?.email.toString())
+        //TODO: брать из бд радельно свои и чужие проекты
     init {
         //TODO: refactor -> make class for db operations
         projRef.addSnapshotListener(MetadataChanges.INCLUDE) { snapshot, e ->

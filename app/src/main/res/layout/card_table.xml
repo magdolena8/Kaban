@@ -52,7 +52,7 @@
             android:layout_gravity="end|center"
             android:layout_marginEnd="15dp"
             android:fontFamily="sans-serif-medium"
-            android:text="Tasks:"
+            android:text="Active tasks:"
             android:textColor="@color/teal_200"
             android:textSize="16sp" />
         <TextView

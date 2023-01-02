@@ -5,22 +5,13 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.ActivityNavigator
 import androidx.navigation.NavDirections
-import androidx.navigation.findNavController
-import com.begdev.kaban.R
 import com.begdev.kaban.navigation.NavigationCommand
 import com.begdev.kaban.model.ProjectModel
-import com.begdev.kaban.ui.CreateProjectFragment
-import com.begdev.kaban.ui.CreateProjectFragmentDirections
-import com.begdev.kaban.ui.MainActivity
-import com.begdev.kaban.ui.ProjectsListFragment
 import com.begdev.kaban.utils.Event
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 
 data class NewProjectUiState(
@@ -45,7 +36,9 @@ class NewProjectViewModel() : ViewModel() {
 
 
     fun addTable(view: View) {
-        val tables: MutableList<String>? = _uiState.value.tablesArrayList;
+        //todo: check input before back fragment
+        val tables: MutableList<String>? = _uiState.value.project?.tableNamesArray;
+
         tables?.add(_uiState.value.currentEditingTableName.toString());
 //        _uiState.value.project?.tables?.add(_uiState.value.currentEditingTableName.toString())
 

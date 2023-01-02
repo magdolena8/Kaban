@@ -29,6 +29,7 @@ class CreateProjectFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.setTitle("Create Project")
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_create_project, container, false)
         binding.vmNewProject = projectViewModel
@@ -49,7 +50,7 @@ class CreateProjectFragment : Fragment() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 projectViewModel.uiState.collect {
-                    newTablesAdapter.submitList(it.project?.tables)
+                    newTablesAdapter.submitList(it.project?.tableNamesArray)
                 }
             }
         }

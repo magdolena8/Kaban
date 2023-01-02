@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/enterProject"
-        android:title="button1"
+        android:id="@+id/addUser"
+        android:title="addUser"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/add_48px"/>
+        android:icon="@drawable/group_add_48px" />
+
 </menu>

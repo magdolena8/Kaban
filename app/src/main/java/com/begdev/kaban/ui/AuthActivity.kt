@@ -41,16 +41,15 @@ class AuthActivity : AppCompatActivity() {
         auth = Firebase.auth;
         currentUser = auth.currentUser!!
 
-        if(currentUser != null){
+        if (currentUser != null) {
             Log.d(TAG, "User is already logged ${currentUser.email}")
-            updateUI(currentUser)
-        }
-        else Log.d(TAG, "User is NULL $currentUser")
+//            updateUI(currentUser)
+        } else Log.d(TAG, "User is NULL $currentUser")
 
 
 
         btnSignInGoogle = findViewById(R.id.btnSignInGoogle)
-        btnRegister = findViewById(R.id.btnRegister)
+//        btnRegister = findViewById(R.id.btnRegister)
         oneTapClient = Identity.getSignInClient(this)
 
         signInRequest = BeginSignInRequest.builder()
@@ -68,18 +67,6 @@ class AuthActivity : AppCompatActivity() {
             )
             .setAutoSelectEnabled(true)    //may be true
             .build()
-
-//        signUpRequest = BeginSignInRequest.builder()
-//            .setGoogleIdTokenRequestOptions(
-//                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-//                    .setSupported(true)
-//                    // Your server's client ID, not your Android client ID.
-//                    .setServerClientId(getString(R.string.default_web_client_id))
-//                    // Show all accounts on the device.
-//                    .setFilterByAuthorizedAccounts(false)
-//                    .build()
-//            )
-//            .build()
 
         btnSignInGoogle.setOnClickListener {
             oneTapClient.beginSignIn(signInRequest)
@@ -99,20 +86,6 @@ class AuthActivity : AppCompatActivity() {
                     Log.d(TAG, "Log In error ${e.localizedMessage}")
                 }
         }
-//        btnRegister.setOnClickListener{
-//            oneTapClient.beginSignIn(signUpRequest).addOnSuccessListener {
-//                try {
-//                    Toast.makeText(this, "Зарегались", Toast.LENGTH_LONG).show()
-////                    Log.d(TAG, )
-//
-//                } catch (e: IntentSender.SendIntentException) {
-//                    Log.e(TAG, "Couldn't start One Tap UI: ${e.localizedMessage}")
-//                }
-//            }.addOnFailureListener{
-//                Toast.makeText(this, "Ошибка регистрации", Toast.LENGTH_LONG).show()
-//
-//            }
-//        }
     }
 
     private fun updateUI(user: FirebaseUser?) {

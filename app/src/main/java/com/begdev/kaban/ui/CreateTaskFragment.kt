@@ -27,6 +27,8 @@ class CreateTaskFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        activity?.setTitle("Create Task")
+
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_create_task, container, false)
         binding.vmNewTask = viewModelTask
