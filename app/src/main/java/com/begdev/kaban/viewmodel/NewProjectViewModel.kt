@@ -28,31 +28,15 @@ class NewProjectViewModel() : ViewModel() {
     val navigation: LiveData<Event<NavigationCommand>> get() = _navigation
 
 
-//    fun addTableTest() = viewModelScope.launch {
-//        val tables: MutableList<String>? = _uiState.value.tablesArrayList;
-//        tables?.add(_uiState.value.currentEditingTableName.toString());
-//        _uiState.value.project?.tables?.add(_uiState.value.currentEditingTableName.toString())
-//    }
-
-
     fun addTable(view: View) {
-        //todo: check input before back fragment
         val tables: MutableList<String>? = _uiState.value.project?.tableNamesArray;
-
         tables?.add(_uiState.value.currentEditingTableName.toString());
-//        _uiState.value.project?.tables?.add(_uiState.value.currentEditingTableName.toString())
-
-//        view.findNavController()
-//        navigate(CreateProjectFragmentDirections.actionCreateProjectFragmentToProjectsListFragment())
 
     }
 
     fun createProject(view: View) {
         _uiState.value.project?.createProject();
         Log.d("NEWPROJECTVM", "create project")
-//        navigateBack()
-
-//        navigate(CreateProjectFragmentDirections.actionCreateProjectFragmentToProjectsListFragment())
     }
 
     fun navigate(navDirections: NavDirections) {

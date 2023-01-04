@@ -25,8 +25,6 @@ class NewTableViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(NewTablesUiState())
     val uiState: StateFlow<NewTablesUiState> = _uiState.asStateFlow()
 
-//    val tableStringInput: ObservableField<String> = ObservableField("")
-
     fun addTable(view: View){
         val projects: MutableList<String>? = _uiState.value.tablesArrayList;
         projects?.add(_uiState.value.currentEditingTableName.toString());
@@ -35,9 +33,5 @@ class NewTableViewModel : ViewModel() {
                 tablesArrayList = projects
             )
         }
-
-//        _uiState.value.tablesArrayList?.add(_uiState.value.currentEditingTableName.toString())
-//        Log.d("NewTableET", _uiState.value.currentEditingTableName.toString())
-
     }
 }

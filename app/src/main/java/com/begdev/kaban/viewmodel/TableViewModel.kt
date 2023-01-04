@@ -35,17 +35,10 @@ class TableViewModel(val table: TableModel): ViewModel() {
             val tasks: MutableList<TaskModel> = mutableListOf()
             for (item in documents) {
                 if (item.data == null) continue
-                //TODO hz как, но надо парсить в объект ProjectModel
-                ///////////
-//                var qwe:MutableLiveData<Objects> = item.data.get("name")
                 val task = item.toObject(TaskModel::class.java)!!
-//                task.key = item.id
                 task.path = table.path
                 task.key = item.id
                 tasks.add(task)
-//                projects.add(item.toObject(ProjectModel::class.java)!!)
-//                projects.add(qwe)
-                //////////
                 _uiState.update { currentState ->
                     currentState.copy(
                         tasksArray = tasks

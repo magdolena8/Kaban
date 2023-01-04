@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.*
 
 data class ProjectsUiState(
     var projectsArrayList: MutableList<ProjectModel>? = arrayListOf()
-
 )
 
 class ProjectsListViewModel : ViewModel() {
@@ -19,11 +18,8 @@ class ProjectsListViewModel : ViewModel() {
     val uiState: StateFlow<ProjectsUiState> = _uiState.asStateFlow()
 
     private val db = Firebase.firestore
-//    private val projRef = db.collection("projects").whereEqualTo("creator", Firebase.auth.currentUser?.email.toString())
     private val projRef = db.collection("projects").whereArrayContains("participants", Firebase.auth.currentUser?.email.toString())
-        //TODO: брать из бд радельно свои и чужие проекты
     init {
-        //TODO: refactor -> make class for db operations
         projRef.addSnapshotListener(MetadataChanges.INCLUDE) { snapshot, e ->
             if (e != null) return@addSnapshotListener
             if (snapshot == null) return@addSnapshotListener
@@ -31,15 +27,10 @@ class ProjectsListViewModel : ViewModel() {
             val projects: MutableList<ProjectModel> = mutableListOf()
             for (item in documents) {
                 if (item.data == null) continue
-                //TODO hz как, но надо парсить в объект ProjectModel
-                ///////////
-//                var qwe:MutableLiveData<Objects> = item.data.get("name")
                 val project = item.toObject(ProjectModel::class.java)!!
                 project.key = item.id
                 projects.add(project)
-//                projects.add(item.toObject(ProjectModel::class.java)!!)
-//                projects.add(qwe)
-                //////////
+
                 _uiState.update { currentState ->
                     currentState.copy(
                         projectsArrayList = projects

@@ -36,13 +36,7 @@ class ProjectFragment : Fragment() {
         ProjectViewModel.Factory(args.selectedProject)
     }
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-////        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.my_wallet, null, false);
-////        setContentView(binding.getRoot());
-//
-//
-//    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
