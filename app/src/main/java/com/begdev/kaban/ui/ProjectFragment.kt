@@ -36,8 +36,6 @@ class ProjectFragment : Fragment() {
         ProjectViewModel.Factory(args.selectedProject)
     }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +53,6 @@ class ProjectFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 val table: TableModel = tablesAdapter.currentList.get(position)
                 Log.d("TAAG", position.toString())
-//                findNavController().navigate(ProjectsListFragmentDirections.actionProjectsListFragmentToProjectFragment(qwe))
                 findNavController().navigate(
                     ProjectFragmentDirections.actionProjectFragmentToTableFragment(
                         table

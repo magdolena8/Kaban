@@ -85,6 +85,9 @@
             app:destination="@id/projectFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_tableFragment_to_addTrackedFragment"
+            app:destination="@id/addTrackedFragment" />
     </fragment>
     <fragment
         android:id="@+id/createTaskFragment"
@@ -101,5 +104,15 @@
             app:destination="@id/tableFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_in" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTrackedFragment"
+        android:name="com.begdev.kaban.ui.AddTrackedFragment"
+        android:label="fragment_add_tracked"
+        tools:layout="@layout/fragment_add_tracked">
+        <argument
+            android:name="addingTask"
+            app:argType="com.begdev.kaban.model.TaskModel"
+            app:nullable="false"/>
     </fragment>
 </navigation>

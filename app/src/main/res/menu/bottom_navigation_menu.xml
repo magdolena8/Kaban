@@ -4,15 +4,15 @@
         android:id="@+id/projectsListFragment"
         android:enabled="true"
         android:icon="@drawable/view_cozy_48px"
-        android:title="projects"/>
+        android:title="Projects"/>
     <item
-        android:id="@+id/page_notes"
+        android:id="@+id/trackedFragment"
         android:enabled="true"
         android:icon="@drawable/checklist_48px"
-        android:title="tasks"/>
+        android:title="Tracked"/>
     <item
         android:id="@+id/profileFragment"
         android:enabled="true"
         android:icon="@drawable/account"
-        android:title="account"/>
+        android:title="Profile"/>
 </menu>

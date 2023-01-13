@@ -2,10 +2,9 @@ package com.begdev.kaban.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
+import android.view.*
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.begdev.kaban.R
 import com.begdev.kaban.databinding.FragmentTableBinding
@@ -45,11 +44,9 @@ class TableFragment : Fragment(R.layout.fragment_table) {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding = FragmentTableBinding.bind(view)
-//        binding.vmTable = viewModelTable
-//        tasksAdapter.setHasStableIds(true)
 
         binding.apply {
             tasksRecycler.apply {
@@ -57,9 +54,6 @@ class TableFragment : Fragment(R.layout.fragment_table) {
                 adapter = tasksAdapter
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
-//                setHasStableIds(true)
-//                itemAnimator.changeDuration(0)
-//                (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
             }
         }
 
@@ -72,8 +66,12 @@ class TableFragment : Fragment(R.layout.fragment_table) {
             }
         }
 
-        binding.buttonCreateTask.setOnClickListener{
-            findNavController().navigate(TableFragmentDirections.actionTableFragmentToCreateTaskFragment(viewModelTable.table))
+        binding.buttonCreateTask.setOnClickListener {
+            findNavController().navigate(
+                TableFragmentDirections.actionTableFragmentToCreateTaskFragment(
+                    viewModelTable.table
+                )
+            )
         }
 
 //        tasksAdapter.setOnItemClickListener(object: TasksAdapter.onItemCLickListener{
@@ -83,7 +81,35 @@ class TableFragment : Fragment(R.layout.fragment_table) {
 ////                findNavController().navigate(ProjectsListFragmentDirections.actionProjectsListFragmentToProjectFragment(project))
 //            }
 //        })
-//
+
+        tasksAdapter.setOnItemLongClickListener(object : TasksAdapter.OptionsMenuClickListener {
+            override fun onOptionsMenuClicked(position: Int): Boolean {
+                performOptionsMenuClick(position)
+                return true
+            }
+
+        })
+    }
+
+    private fun performOptionsMenuClick(position: Int) {
+        val popupMenu = PopupMenu(context , binding.tasksRecycler.getChildAt(position))
+        popupMenu.inflate(R.menu.options_menu_task)
+        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener{
+            override fun onMenuItemClick(item: MenuItem?): Boolean {
+                when(item?.itemId){
+                    R.id.addToTracked -> {
+                        val qwe = tasksAdapter.currentList.get(position)
+                        findNavController().navigate(TableFragmentDirections.actionTableFragmentToAddTrackedFragment(qwe))
+//                        findNavController().navigate(TableFragmentDirections.actionTableFragmentToAddTrackedFragment())
+                        return true
+                    }
+                }
+                return false
+            }
+        })
+
+        popupMenu.show()
+
 
     }
 

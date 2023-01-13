@@ -10,26 +10,35 @@ import com.begdev.kaban.model.TaskModel
 
 class TasksAdapter :
     ListAdapter<TaskModel, TasksAdapter.TaskViewHolder>(DiffCallback()) {
-    init{
+    init {
         this.setHasStableIds(true)
     }
+
+    private lateinit var mListener: OptionsMenuClickListener
+
+    interface OptionsMenuClickListener {
+        fun onOptionsMenuClicked(position: Int): Boolean
+    }
+
+    fun setOnItemLongClickListener(listener: OptionsMenuClickListener) {
+        mListener = listener
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TasksAdapter.TaskViewHolder {
         val binding = CardTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TaskViewHolder(binding)
+        return TaskViewHolder(binding, mListener)
     }
+
     override fun onBindViewHolder(holder: TasksAdapter.TaskViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.bind(currentItem)
+//        holder.itemView.setOnLongClickListener{
+//        }
     }
 
-//    override fun getItemId(position: Int): Long {
-//        val task: TaskModel = currentList.get(position)
-//        return task.
-//    }
-
-
-    //    class TaskViewHolder(private val binding: CardTaskBinding, listener: onItemCLickListener) :
-    class TaskViewHolder(private val binding: CardTaskBinding) :
+    class TaskViewHolder(private val binding: CardTaskBinding, listener: OptionsMenuClickListener) :
+//    class TaskViewHolder(private val binding: CardTaskBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(task: TaskModel) {
             binding.apply {
@@ -37,10 +46,9 @@ class TasksAdapter :
                 textViewTitle.text = task.title
                 textViewDescription.text = task.description
                 checkboxStatus.isChecked = task.isChecked
-//                text_view_created = task
-//                textViewTasksCount.text = table.tasksCount.toString()
-//                textViewDescription = table.descriptor
-//                textViewName.text = "qweqwe"
+
+
+//                itemView.setOnLongClickListener{}
             }
             binding.checkboxStatus.setOnCheckedChangeListener { buttonView, isChecked ->
 
@@ -50,13 +58,16 @@ class TasksAdapter :
                     task.uncheckStatus()
                 }
             }
-        }
-//        init {
-//            itemView.setOnClickListener{
-//                listener.onItemClick(adapterPosition)
-//            }
-//        }
 
+        }
+
+        init {
+
+
+            itemView.setOnLongClickListener {
+                listener.onOptionsMenuClicked(position)
+            }
+        }
     }
 
 

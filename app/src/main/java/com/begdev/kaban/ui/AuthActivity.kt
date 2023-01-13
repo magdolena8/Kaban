@@ -28,7 +28,7 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var signInRequest: BeginSignInRequest
     private lateinit var signUpRequest: BeginSignInRequest
     private lateinit var auth: FirebaseAuth
-    private lateinit var currentUser: FirebaseUser
+//    private lateinit var currentUser: FirebaseUser
 
     private companion object {
         private const val TAG = "AuthActivity"
@@ -38,13 +38,16 @@ class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-        auth = Firebase.auth;
-        currentUser = auth.currentUser!!
 
-        if (currentUser != null) {
-            Log.d(TAG, "User is already logged ${currentUser.email}")
-//            updateUI(currentUser)
-        } else Log.d(TAG, "User is NULL $currentUser")
+        auth = Firebase.auth;
+        val qwe = FirebaseAuth.getInstance()
+//        currentUser = auth.currentUser
+
+
+//        if (currentUser != null) {
+//            Log.d(TAG, "User is already logged ${currentUser!!.email}")
+////            updateUI(currentUser)
+//        } else Log.d(TAG, "User is NULL $currentUser")
 
 
 
@@ -95,7 +98,7 @@ class AuthActivity : AppCompatActivity() {
         ).show()
         val intentMainActivity: Intent = Intent(this, MainActivity::class.java)
         startActivity(intentMainActivity.apply {
-            putExtra("user", currentUser)
+            putExtra("user", user)
         })
     }
 
