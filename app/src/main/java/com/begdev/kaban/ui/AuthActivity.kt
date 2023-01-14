@@ -40,6 +40,7 @@ class AuthActivity : AppCompatActivity() {
         setContentView(R.layout.activity_auth)
 
         auth = Firebase.auth;
+        val asd = auth.currentUser?.email
         val qwe = FirebaseAuth.getInstance()
 //        currentUser = auth.currentUser
 
@@ -56,20 +57,34 @@ class AuthActivity : AppCompatActivity() {
         oneTapClient = Identity.getSignInClient(this)
 
         signInRequest = BeginSignInRequest.builder()
-            .setPasswordRequestOptions(
-                BeginSignInRequest.PasswordRequestOptions.builder()
-                    .setSupported(true)
-                    .build()
-            )
             .setGoogleIdTokenRequestOptions(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
                     .setServerClientId(getString(R.string.default_web_client_id))
-                    .setFilterByAuthorizedAccounts(true)
-                    .build()
-            )
-            .setAutoSelectEnabled(true)    //may be true
+//                    .setFilterByAuthorizedAccounts(true)
+                    .setFilterByAuthorizedAccounts(false)
+                    .build())
+            .setAutoSelectEnabled(true)
+//            .setAutoSelectEnabled(false)
             .build()
+
+
+//        signInRequest = BeginSignInRequest.builder()
+//            .setPasswordRequestOptions(
+//                BeginSignInRequest.PasswordRequestOptions.builder()
+//                    .setSupported(true)
+//                    .build()
+//            )
+//            .setGoogleIdTokenRequestOptions(
+//                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+//                    .setSupported(true)
+//                    .setServerClientId(getString(R.string.default_web_client_id))
+////                    .setServerClientId("959718372263-frsbfivsd3sp9fmpv82cgmn2iou2tqpl.apps.googleusercontent.com")
+//                    .setFilterByAuthorizedAccounts(false)
+//                    .build()
+//            )
+//            .setAutoSelectEnabled(true)    //may be true
+//            .build()
 
         btnSignInGoogle.setOnClickListener {
             oneTapClient.beginSignIn(signInRequest)
@@ -144,5 +159,31 @@ class AuthActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
+//override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//    super.onActivityResult(requestCode, resultCode, data)
+//    when (requestCode) {
+//        2 -> {
+//            try {
+//                val credential = oneTapClient.getSignInCredentialFromIntent(data)
+//                val idToken = credential.googleIdToken
+//                when {
+//                    idToken != null -> {
+//                        // Got an ID token from Google. Use it to authenticate
+//                        // with Firebase.
+//                        Log.d(TAG, "Got ID token.")
+//                    }
+//                    else -> {
+//                        // Shouldn't happen.
+//                        Log.d(TAG, "No ID token!")
+//                    }
+//                }
+//            } catch (e: ApiException) {
+//                // ...
+//            }
+//        }
+//    }
 
 }

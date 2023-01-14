@@ -32,6 +32,10 @@ class CreateTaskFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_create_task, container, false)
         binding.vmNewTask = viewModelTask
+
+
+
+
         return binding.root
     }
 }

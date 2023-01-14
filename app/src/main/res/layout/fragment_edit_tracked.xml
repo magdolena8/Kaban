@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.AddTrackedFragment">
+    tools:context=".ui.EditTrackedFragment">
 
     <data>
         <variable
-            name="vmTask"
-            type="com.begdev.kaban.viewmodel.NewTrackedViewModel" />
+            name="vmTracked"
+            type="com.begdev.kaban.viewmodel.EditTrackedViewModel" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -19,13 +19,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{vmTask.uiState.task.title}"
+            android:text="@{vmTracked.uiState.tracked.task.title}"
             android:textSize="30dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{vmTask.uiState.task.description}"
+            android:text="@{vmTracked.uiState.tracked.task.description}"
             android:textSize="20dp"
             android:layout_marginTop="20dp"
             />
@@ -35,13 +35,13 @@
             android:text="Set a Deadline:"
             android:layout_marginTop="20dp"/>
 
-      <CalendarView
-          android:id="@+id/calendarDeadLine"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
+        <CalendarView
+            android:id="@+id/calendarDeadLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
 
-          />
+            />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -65,9 +65,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:text="START TRACKING"
+            android:text="EDIT TRACKING"
             app:cornerRadius="10dp"
-            android:onClick="@{vmTask::addTracked}"
+            android:onClick="@{vmTracked::editTracked}"
             />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

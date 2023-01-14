@@ -1,14 +1,13 @@
 package com.begdev.kaban.ui
 
 import android.os.Bundle
-import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
-import com.begdev.kaban.R
-import com.begdev.kaban.databinding.FragmentTableBinding
-import com.begdev.kaban.viewmodel.TableViewModel
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,12 +15,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.SimpleItemAnimator
-import com.begdev.kaban.adapter.ProjectsListAdapter
-import com.begdev.kaban.adapter.TablesAdapter
+import com.begdev.kaban.R
 import com.begdev.kaban.adapter.TasksAdapter
-import com.begdev.kaban.model.ProjectModel
-import com.begdev.kaban.model.TaskModel
+import com.begdev.kaban.databinding.FragmentTableBinding
+import com.begdev.kaban.viewmodel.TableViewModel
 import kotlinx.coroutines.launch
 
 
@@ -98,8 +95,8 @@ class TableFragment : Fragment(R.layout.fragment_table) {
             override fun onMenuItemClick(item: MenuItem?): Boolean {
                 when(item?.itemId){
                     R.id.addToTracked -> {
-                        val qwe = tasksAdapter.currentList.get(position)
-                        findNavController().navigate(TableFragmentDirections.actionTableFragmentToAddTrackedFragment(qwe))
+                        val selectedTask = tasksAdapter.currentList.get(position)
+                        findNavController().navigate(TableFragmentDirections.actionTableFragmentToAddTrackedFragment(selectedTask))
 //                        findNavController().navigate(TableFragmentDirections.actionTableFragmentToAddTrackedFragment())
                         return true
                     }
@@ -107,10 +104,7 @@ class TableFragment : Fragment(R.layout.fragment_table) {
                 return false
             }
         })
-
         popupMenu.show()
-
-
     }
 
 

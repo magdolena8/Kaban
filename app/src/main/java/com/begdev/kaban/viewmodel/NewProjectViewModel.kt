@@ -39,13 +39,7 @@ class NewProjectViewModel() : ViewModel() {
         Log.d("NEWPROJECTVM", "create project")
     }
 
-    fun navigate(navDirections: NavDirections) {
-        _navigation.value = Event(NavigationCommand.ToDirection(navDirections))
-    }
 
-    fun navigateBack() {
-        _navigation.value = Event(NavigationCommand.Back)
-    }
 
 
 

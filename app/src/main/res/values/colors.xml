@@ -16,4 +16,11 @@
     <color name="ivory">#FAFCF0</color>
     <color name="junebud">#B1DC37</color>
     <color name="yellowgreencrayoula">#BAD683</color>
+
+
+    <color name="green">#28DD31</color>
+    <color name="red">#D11C5B</color>
+    <color name="yellow">#DCCD4E</color>
+
+
 </resources>
