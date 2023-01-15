@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.READ_CALENDAR"/>
     <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,6 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kaban"
         tools:targetApi="31">
+
+        <provider
+            android:authorities="com.begdev.provider.tracked"
+            android:name=".utils.TrackedContentProvider"
+            android:exported="true"
+            />
+
         <activity
             android:name=".ui.MainActivity"
             android:exported="false">

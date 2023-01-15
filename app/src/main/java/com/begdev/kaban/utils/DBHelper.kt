@@ -67,7 +67,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "tracker.db", null,
         val db = this.writableDatabase
         var values: ContentValues = ContentValues()
         val formatter = SimpleDateFormat("yyyy-MM-dd")
-        values.put("deadline",formatter.format(tracked.deadline))
+        values.put("deadline", formatter.format(tracked.deadline))
         values.put("color", tracked.color)
         try {
             db.update("tracked", values, "title == ?", tracked.task?.let { arrayOf(it.title) })
@@ -86,6 +86,33 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, "tracker.db", null,
             e.printStackTrace()
             return false
         }
+        return true
+    }
+
+    fun clearDataBase(): Boolean {
+        val db = this.writableDatabase
+        try {
+            db.execSQL("delete from tracked")
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            return false
+        }
+        return true
+    }
+
+    fun fillDataBase(listTracked: List<TrackedModel>): Boolean {
+        val db = this.writableDatabase
+        try {
+            for (tracked in listTracked) {
+                val formatter = SimpleDateFormat("yyyy-MM-dd")
+                val dateString = formatter.format(tracked.deadline)
+                db.execSQL("insert into tracked (title, description, deadline, color, refKey) VALUES (\"${tracked.task?.title}\", \"${tracked.task?.description}\", \"${dateString}\", \"${tracked.color}\", \"${tracked.task?.path}\")")
+            }
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            return false
+        }
+
         return true
     }
 

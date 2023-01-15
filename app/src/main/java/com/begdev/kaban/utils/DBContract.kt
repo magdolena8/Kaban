@@ -5,7 +5,7 @@ class DBContract {
 
     companion object {
 
-        const val sqlCreateTableTasks: String = "create table if not exists tracked (\n" +
+        const val sqlCreateTableTasks: String = "create table tracked (\n" +
                 "\t_id integer primary key AUTOINCREMENT,\n" +
                 "\ttitle text not null,\n" +
                 "\tdescription text,\n" +
